@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Отправка заявок в AmoCRM</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<form id="leadForm">
+  <label for="name">Имя:</label>
+  <input type="text" id="name" name="name" required><br>
+
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required><br>
+
+  <label for="phone">Телефон:</label>
+  <input type="tel" id="phone" name="phone" required><br>
+
+  <label for="price">Цена:</label>
+  <input type="number" id="price" name="price" required><br>
+
+  <button type="submit">Отправить заявку</button>
+</form>
+
+<script>
+  // Обработчик отправки формы
+  document.getElementById('leadForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    sendLead();
+  });
+
+  // Функция для отправки заявки
+  function sendLead() {
+    var xhr = new XMLHttpRequest();
+    var url = 'index.php';
+    var formData = new FormData();
+
+    // Получаем данные из формы
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var phone = document.getElementById('phone').value;
+    var price = document.getElementById('price').value;
+
+    // Добавляем данные в объект FormData
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('price', price);
+
+    // Отправляем данные на сервер
+    xhr.open('POST', url, true);
+    xhr.send(formData);
+
+    // Обработка успешного ответа
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+        alert('Заявка успешно отправлена в AmoCRM!');
+      }
+    };
+  }
+</script>
+</body>
+</html>
