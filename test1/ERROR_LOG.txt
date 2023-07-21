@@ -1,2 +1,1 @@
-Ошибка: Bad request
-Код ошибки: 400https://testoviimyrubikonru.amocrm.ru/api/v4/contacts/33482751/link
+
